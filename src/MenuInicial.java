@@ -9,3 +9,4 @@ public MenuInicial(){
     registrarseButton.addActionListener(e -> )
 }
 }
+//.
