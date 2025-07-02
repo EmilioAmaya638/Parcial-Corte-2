@@ -3,6 +3,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Registro {
+    public JLabel etiquetatitulo;
+    public JLabel etiquetacedulausuario;
+    public JLabel etiquetanameusuario;
+    public JLabel etiquetacantidadmascotas;
+    public JLabel etiquetanombredemascotas;
+    public JLabel etiquetahistoriamascota;
     public JPanel panelprincipal;
     public JTextField textFieldnameusuario;
     public JTextField textFieldcedulausuario;
