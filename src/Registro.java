@@ -55,8 +55,8 @@ public class Registro {
                 fila.add(etiquetaHistoria);
                 fila.add(campoHistoria);
 
-                panelmascotas.add(fila); // Agregamos la fila completa al panel
-                panelmascotas.add(Box.createVerticalStrut(10)); // Espacio entre bloques
+                panelmascotas.add(fila);
+                panelmascotas.add(Box.createVerticalStrut(10));
             }
 
             panelmascotas.revalidate();
