@@ -74,7 +74,8 @@ public class InicioSesión {
                     return;
                 }
 
-                StringBuilder informe = new StringBuilder();
+                StringBuilder informeCompleto = new StringBuilder("Informe General de Mascotas:\n");
+                StringBuilder informeDueños = new StringBuilder("Lista de Dueños Registrados:\n");
 
                 for (File archivo : archivos) {
                     try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
@@ -83,10 +84,14 @@ public class InicioSesión {
                         while ((linea = reader.readLine()) != null) {
                             if (linea.startsWith("Dueño:")) {
                                 dueño = linea;
-                                informe.append("\n").append(dueño).append("\n");
+                                informeCompleto.append("\n").append(dueño).append("\n");
+
+                                // Extraer solo el nombre del dueño para el segundo informe
+                                String nombreDueño = linea.replace("Dueño: ", "").split(" - ")[0].trim();
+                                informeDueños.append("• ").append(nombreDueño).append("\n");
                             }
                             if (linea.startsWith("Nombre:") && !dueño.isEmpty()) {
-                                informe.append(" - ").append(linea.substring(8)).append("\n");
+                                informeCompleto.append(" - ").append(linea.substring(8)).append("\n");
                             }
                         }
                     } catch (IOException ex) {
@@ -94,19 +99,18 @@ public class InicioSesión {
                     }
                 }
 
-                JTextArea textArea = new JTextArea(informe.toString());
-                textArea.setEditable(false);
-                JScrollPane scrollPane = new JScrollPane(textArea);
-                scrollPane.setPreferredSize(new java.awt.Dimension(500, 400));
-                JOptionPane.showMessageDialog(null, scrollPane, "Informe General de Mascotas", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
+                // Mostrar informe general (dueños + mascotas)
+                JTextArea textArea1 = new JTextArea(informeCompleto.toString());
+                textArea1.setEditable(false);
+                JScrollPane scrollPane1 = new JScrollPane(textArea1);
+                scrollPane1.setPreferredSize(new java.awt.Dimension(500, 400));
+                JOptionPane.showMessageDialog(null, scrollPane1, "Informe General de Mascotas", JOptionPane.INFORMATION_MESSAGE);
 
-        finalizarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ((JFrame) SwingUtilities.getWindowAncestor(panel1)).dispose();
+                // Mostrar informe solo de dueños
+                JTextArea textArea2 = new JTextArea(informeDueños.toString());
+                textArea2.setEditable(false);
+                JScrollPane scrollPane2 = new JScrollPane(textArea2);
+                scrollPane2.setPreferredSize(new java.awt.Dimension(400, 300));
+                JOptionPane.showMessageDialog(null, scrollPane2, "Solo Dueños Registrados", JOptionPane.INFORMATION_MESSAGE);
             }
-        });
-    }
-}
+        });}}
