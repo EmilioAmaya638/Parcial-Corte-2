@@ -12,6 +12,7 @@ public class Registro {
     public JLabel etiquetacedulausuario;
     public JLabel etiquetanameusuario;
     public JLabel etiquetacantidadmascotas;
+    public JTextField textFieldcantidadmascotas;
 
     public Registro(JFrame ventanaRegistro) {
         finalizarButton.addActionListener(new ActionListener() {
@@ -26,15 +27,7 @@ public class Registro {
                 }
 
                 JOptionPane.showMessageDialog(null, "Registro de usuario finalizado.");
-
-                ventanaRegistro.dispose();
-
-                JFrame mascotaFrame = new JFrame("Registro de Mascotas");
-                RegistrodeMascotas registroMascota = new RegistrodeMascotas(cedulaUsuario, nombreUsuario);
-                mascotaFrame.setContentPane(registroMascota.panel1);
-                mascotaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                mascotaFrame.pack();
-                mascotaFrame.setVisible(true);
+                ventanaRegistro.dispose(); // Solo cierra la ventana
             }
         });
     }

@@ -1,0 +1,11 @@
+Dueño: Emilio Amaya - Cédula: 1074344734
+
+Mascota:
+Nombre: Jero
+Especie: perro
+Historia: clinica
+
+Mascota:
+Nombre: gupy
+Especie: gato
+Historia: dead

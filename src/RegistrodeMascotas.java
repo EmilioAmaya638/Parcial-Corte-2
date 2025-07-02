@@ -13,7 +13,7 @@ public class RegistrodeMascotas {
     private JLabel especieLabel;
     private JLabel historiaLabel;
 
-    public RegistrodeMascotas(String cedula, String nombreDueño) {
+    public RegistrodeMascotas(String cedula, String nombreDueño, JFrame ventana) {
         finalizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -29,11 +29,7 @@ public class RegistrodeMascotas {
                 GestorDeArchivos.guardarMascota(cedula, nombreDueño, nombreMascota, especie, historia);
 
                 JOptionPane.showMessageDialog(null, "Mascota registrada correctamente.");
-
-                // Opción: limpiar campos para registrar otra
-                textField1.setText("");
-                textField2.setText("");
-                textField3.setText("");
+                ventana.dispose(); // Cierra la ventana actual
             }
         });
     }

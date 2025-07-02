@@ -13,7 +13,6 @@ public class InicioSesión {
     private JButton verMascotasButton;
 
     public InicioSesión() {
-
         registrarMascotasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -26,7 +25,7 @@ public class InicioSesión {
                 }
 
                 JFrame mascotaFrame = new JFrame("Registro de Mascotas");
-                RegistrodeMascotas registroMascota = new RegistrodeMascotas(cedula, nombre);
+                RegistrodeMascotas registroMascota = new RegistrodeMascotas(cedula, nombre, mascotaFrame);
                 mascotaFrame.setContentPane(registroMascota.panel1);
                 mascotaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 mascotaFrame.pack();
@@ -45,16 +44,12 @@ public class InicioSesión {
                     return;
                 }
 
-                try {
-                    BufferedReader reader = new BufferedReader(new FileReader(archivo));
+                try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
                     StringBuilder contenido = new StringBuilder();
                     String linea;
-
                     while ((linea = reader.readLine()) != null) {
                         contenido.append(linea).append("\n");
                     }
-
-                    reader.close();
 
                     JTextArea textArea = new JTextArea(contenido.toString());
                     textArea.setEditable(false);
@@ -62,10 +57,8 @@ public class InicioSesión {
                     scrollPane.setPreferredSize(new java.awt.Dimension(400, 300));
 
                     JOptionPane.showMessageDialog(null, scrollPane, "Mascotas Registradas", JOptionPane.INFORMATION_MESSAGE);
-
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error al leer el archivo.");
                 }
             }
         });
@@ -73,7 +66,7 @@ public class InicioSesión {
         informeDeDatosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File carpeta = new File("."); // directorio actual
+                File carpeta = new File(".");
                 File[] archivos = carpeta.listFiles((dir, name) -> name.endsWith(".txt"));
 
                 if (archivos == null || archivos.length == 0) {
@@ -101,12 +94,18 @@ public class InicioSesión {
                     }
                 }
 
-                // Mostrar informe
                 JTextArea textArea = new JTextArea(informe.toString());
                 textArea.setEditable(false);
                 JScrollPane scrollPane = new JScrollPane(textArea);
                 scrollPane.setPreferredSize(new java.awt.Dimension(500, 400));
                 JOptionPane.showMessageDialog(null, scrollPane, "Informe General de Mascotas", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        finalizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ((JFrame) SwingUtilities.getWindowAncestor(panel1)).dispose();
             }
         });
     }
