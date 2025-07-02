@@ -42,7 +42,7 @@ public class Registro {
             panelmascotas.setLayout(new BoxLayout(panelmascotas, BoxLayout.Y_AXIS));
 
             for (int i = 1; i <= cantidad; i++) {
-                // Panel para una mascota
+
                 JPanel fila = new JPanel(new GridLayout(2, 2, 5, 5)); // 2 filas x 2 columnas
 
                 JLabel etiquetaNombre = new JLabel("Mascota " + i + ":");
