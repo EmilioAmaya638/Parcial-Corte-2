@@ -1,7 +1,9 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Registro {
-
+    public JPanel panelprincipal;
     public JTextField textFieldnameusuario;
     public JTextField textFieldcedulausuario;
     public JCheckBox animalesSalvajesCheckBox;
@@ -9,15 +11,26 @@ public class Registro {
     public JTextField textFieldcantidadmascotas;
     public JTextField textFieldhistoriamascota;
     public JButton finalizarButton;
-    public JPanel panelprincipal;
-    public JLabel etiquetatitulo;
-    public JLabel etiquetanameusuario;
-    public JLabel etiquetacedulausuario;
-    public JLabel etiquetacantidadmascotas;
-    public JLabel etiquetanombredemascotas;
-    public JLabel etiquetahistoriamascota;
-    public Registro () {
-        finalizarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Registro finalizado"));
-    }
 
+    public Registro(JFrame ventanaRegistro) {  // ← recibir el JFrame que contiene el panel
+        finalizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Registro finalizado");
+
+                // Cerrar ventana actual
+                ventanaRegistro.dispose();
+
+                // Volver al menú inicial
+                JFrame menuFrame = new JFrame("Menú Inicial");
+                menuFrame.setContentPane(new MenuInicial().panelMenu);
+                menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                menuFrame.pack();
+                menuFrame.setVisible(true);
+            }
+        });
+    }
 }
+
+
+
