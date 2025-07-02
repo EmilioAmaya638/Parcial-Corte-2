@@ -5,8 +5,8 @@ public class MenuInicial {
     public JButton registrarseButton;
 
 public MenuInicial(){
-    iniciarSesiónButton.addActionListener(e -> )
-    registrarseButton.addActionListener(e -> )
+
+
 }
 }
 //.
