@@ -11,15 +11,12 @@ public class MenuInicial {
         registrarseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame registroFrame = new JFrame("Registro");
-                Registro registro = new Registro(registroFrame); // ← pasar la ventana actual al constructor
+                JFrame registroFrame = new JFrame("Registro de Usuario");
+                Registro registro = new Registro(registroFrame); // pasar la ventana al constructor
                 registroFrame.setContentPane(registro.panelprincipal);
                 registroFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 registroFrame.pack();
                 registroFrame.setVisible(true);
-
-                // (Opcional) cerrar el menú inicial si no quieres que quede abierto
-                // ((JFrame) SwingUtilities.getWindowAncestor(panelMenu)).dispose();
             }
         });
     }

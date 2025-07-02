@@ -3,40 +3,41 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Registro {
-    public JLabel etiquetatitulo;
-    public JLabel etiquetacedulausuario;
-    public JLabel etiquetanameusuario;
-    public JLabel etiquetacantidadmascotas;
-    public JLabel etiquetanombredemascotas;
-    public JLabel etiquetahistoriamascota;
     public JPanel panelprincipal;
     public JTextField textFieldnameusuario;
     public JTextField textFieldcedulausuario;
     public JCheckBox animalesSalvajesCheckBox;
-    public JTextField textFieldnombremascotas;
-    public JTextField textFieldcantidadmascotas;
-    public JTextField textFieldhistoriamascota;
     public JButton finalizarButton;
+    public JLabel etiquetatitulo;
+    public JLabel etiquetacedulausuario;
+    public JLabel etiquetanameusuario;
+    public JLabel etiquetacantidadmascotas;
 
-    public Registro(JFrame ventanaRegistro) {  // ← recibir el JFrame que contiene el panel
+    public Registro(JFrame ventanaRegistro) {
         finalizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Registro finalizado");
+                String nombreUsuario = textFieldnameusuario.getText();
+                String cedulaUsuario = textFieldcedulausuario.getText();
 
-                // Cerrar ventana actual
+                if (nombreUsuario.isEmpty() || cedulaUsuario.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.");
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(null, "Registro de usuario finalizado.");
+
                 ventanaRegistro.dispose();
 
-                // Volver al menú inicial
-                JFrame menuFrame = new JFrame("Menú Inicial");
-                menuFrame.setContentPane(new MenuInicial().panelMenu);
-                menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                menuFrame.pack();
-                menuFrame.setVisible(true);
+                JFrame mascotaFrame = new JFrame("Registro de Mascotas");
+                RegistrodeMascotas registroMascota = new RegistrodeMascotas(cedulaUsuario, nombreUsuario);
+                mascotaFrame.setContentPane(registroMascota.panel1);
+                mascotaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                mascotaFrame.pack();
+                mascotaFrame.setVisible(true);
             }
         });
     }
 }
-
 
 
